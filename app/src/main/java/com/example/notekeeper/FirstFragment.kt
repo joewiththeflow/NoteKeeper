@@ -42,7 +42,7 @@ class FirstFragment : Fragment() {
 
         // Assign the adapter to the spinner's adapter property
         spinnerCourses.adapter = adapterCourses
-        
+
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
