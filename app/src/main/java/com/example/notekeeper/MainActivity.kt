@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_first.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +16,14 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            // Set the text view to display twice the original value when fab clicked
+            val originalValue = textview_first.text.toString().toInt()
+            val newValue = originalValue * 2
+            textview_first.text = newValue.toString()
+
+            // Update snackbar message to show original and new values
+            Snackbar.make(view, "Value $originalValue changed to $newValue",
+                    Snackbar.LENGTH_LONG).show()
         }
     }
 
