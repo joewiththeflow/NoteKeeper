@@ -40,9 +40,22 @@ class FirstFragment : Fragment() {
         // Assign the adapter to the spinner's adapter property
         spinnerCourses.adapter = adapterCourses
 
+        var mainActivityNotePosition = (activity as MainActivity).notePosition
+
+        if(mainActivityNotePosition != POSITION_NOT_SET)
+            displayNote()
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
+    }
+
+    private fun displayNote() {
+        val note = DataManager.notes[(activity as MainActivity).notePosition]
+        textNoteTitle.setText(note.title)
+        textNoteText.setText(note.text)
+
+        val coursePosition = DataManager.courses.values.indexOf(note.course)
+        spinnerCourses.setSelection(coursePosition)
     }
 }
