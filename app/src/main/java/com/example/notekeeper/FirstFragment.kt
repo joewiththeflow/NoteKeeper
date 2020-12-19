@@ -28,14 +28,11 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Create an instance of DataManager
-        val dm = DataManager()
-
         // Create an adapter for the spinner to represent courses
         val adapterCourses = ArrayAdapter<CourseInfo>(
             requireActivity().baseContext,
             android.R.layout.simple_spinner_item,
-            dm.courses.values.toList())
+            DataManager.courses.values.toList())
 
         // Set the adapters dropdown layout
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
