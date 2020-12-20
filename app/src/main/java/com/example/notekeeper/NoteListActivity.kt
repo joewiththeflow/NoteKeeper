@@ -34,4 +34,10 @@ class NoteListActivity : AppCompatActivity() {
             startActivity(activityIntent)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        // Ensure the list is updated when we return to this activity
+        (listNotes.adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
+    }
 }

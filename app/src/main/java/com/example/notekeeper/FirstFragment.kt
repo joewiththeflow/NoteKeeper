@@ -44,6 +44,10 @@ class FirstFragment : Fragment() {
 
         if(mainActivityNotePosition != POSITION_NOT_SET)
             displayNote()
+        else {
+            DataManager.notes.add(NoteInfo())
+            (activity as MainActivity).notePosition = DataManager.notes.lastIndex
+        }
 
         view.findViewById<Button>(R.id.button_first).setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
