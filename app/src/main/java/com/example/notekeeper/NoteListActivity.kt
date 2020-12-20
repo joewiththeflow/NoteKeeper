@@ -21,6 +21,8 @@ class NoteListActivity : AppCompatActivity() {
 
         listItems.layoutManager = LinearLayoutManager(this)
 
+        // Connect recycler adapter to the recycler view
+        listItems.adapter = NoteRecyclerAdapter(this, DataManager.notes)
     }
 
     override fun onResume() {
