@@ -1,6 +1,7 @@
 package com.example.notekeeper
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +13,24 @@ class NoteRecyclerAdapter(private val context: Context, private val notes: List<
 
     private val layoutInflater = LayoutInflater.from(context)
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    // Marking this class as inner allows the class to access the context of its containing class
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // Create the properties to be able to access textViews when we bind later
         val textCourse = itemView.findViewById<TextView?>(R.id.textCourse)
         val textTitle = itemView.findViewById<TextView?>(R.id.textTitle)
+
+        // Create a property to be able to track the position of the note which is currently in the viewHolder
+        var notePosition = 0
+
+        // Use an init block to set a clickListener for the entire itemView
+        // Use it to create an intent, pass the note position and start MainActivity
+        init {
+            itemView.setOnClickListener {
+                val intent = Intent(context, MainActivity::class.java)
+                intent.putExtra(NOTE_POSITION, notePosition)
+                context.startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -35,6 +50,9 @@ class NoteRecyclerAdapter(private val context: Context, private val notes: List<
         // Set the text for the text views (holder is our passed in ViewHolder class)
         holder.textCourse?.text = note.course?.title
         holder.textTitle?.text = note.title
+
+        // Use the position which is passed in to set the notePosition variable in the ViewHolder
+        holder.notePosition = position
     }
 
     override fun getItemCount() = notes.size

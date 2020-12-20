@@ -27,6 +27,7 @@ class NoteListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
+        // Refresh the data displayed in the recycler view
+        listItems.adapter?.notifyDataSetChanged()
     }
 }
