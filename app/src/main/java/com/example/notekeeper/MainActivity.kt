@@ -48,5 +48,20 @@ class MainActivity : AppCompatActivity() {
         // So I have some of the code in the fragment and access it through the nav_host_fragment
         var fragment = nav_host_fragment.childFragmentManager.fragments[0] as FirstFragment
         fragment.displayNote()
+
+        // Invalidate the menu ensures a call to onPrepareOptionsMenu is scheduled below
+        invalidateOptionsMenu()
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if(notePosition >= DataManager.notes.lastIndex) {
+            val menuItem = menu?.findItem(R.id.action_next)
+            if(menuItem != null) {
+                menuItem.icon = getDrawable(R.drawable.ic_block_white_24)
+                menuItem.isEnabled = false
+            }
+        }
+
+        return super.onPrepareOptionsMenu(menu)
     }
 }
