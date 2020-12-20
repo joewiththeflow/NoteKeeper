@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +31,22 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_next -> {
+                moveNext()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun moveNext() {
+        ++notePosition
+
+        // Call the displayNote method on the fragment
+        // Untidy possibly but due to the way I used a starter project which had fragments
+        // whereas the pluralsight course had no fragments
+        // So I have some of the code in the fragment and access it through the nav_host_fragment
+        var fragment = nav_host_fragment.childFragmentManager.fragments[0] as FirstFragment
+        fragment.displayNote()
     }
 }

@@ -50,7 +50,7 @@ class FirstFragment : Fragment() {
         }
     }
 
-    private fun displayNote() {
+    fun displayNote() {
         val note = DataManager.notes[(activity as MainActivity).notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
