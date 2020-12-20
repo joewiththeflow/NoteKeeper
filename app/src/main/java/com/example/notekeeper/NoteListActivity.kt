@@ -29,7 +29,7 @@ class NoteListActivity : AppCompatActivity() {
             // Create the Intent
             val activityIntent = Intent(this, MainActivity::class.java)
             // Include the position of the selected note
-            activityIntent.putExtra(EXTRA_NOTE_POSITION, position)
+            activityIntent.putExtra(NOTE_POSITION, position)
             // start activity
             startActivity(activityIntent)
         }

@@ -16,7 +16,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOT_SET)
+        // Get the note position from the saved instance state if it exists, else get it from the intent
+        notePosition = savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOT_SET) ?:
+            intent.getIntExtra(NOTE_POSITION, POSITION_NOT_SET)
 
     }
 
@@ -69,6 +71,12 @@ class MainActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         saveNote()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        // Save the value of the note position to our saved instance state
+        outState.putInt(NOTE_POSITION, notePosition)
     }
 
     private fun saveNote() {
